@@ -6,18 +6,26 @@
 package views;
 
 import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Docente
  */
 public class MainForm extends javax.swing.JFrame {
+JDesktopPane desktop;
 
     /**
      * Creates new form MainForm
      */
     public MainForm() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/resources/images/tile.png")).getImage());
+        desktop = new JDesktopPane();
+        setContentPane(desktop);
     }
 
     /**
@@ -31,6 +39,7 @@ public class MainForm extends javax.swing.JFrame {
 
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        newFileMenuItem = new javax.swing.JMenuItem();
         openMenu = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         optionsMenu = new javax.swing.JMenu();
@@ -46,6 +55,17 @@ public class MainForm extends javax.swing.JFrame {
 
         fileMenu.setLabel("Archivo");
 
+        newFileMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new.gif"))); // NOI18N
+        newFileMenuItem.setText("Nuevo");
+        newFileMenuItem.setActionCommand("Nuevo");
+        newFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newFileMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(newFileMenuItem);
+
+        openMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/open.gif"))); // NOI18N
         openMenu.setLabel("Abrir");
         openMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +74,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         fileMenu.add(openMenu);
 
+        saveMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/save.gif"))); // NOI18N
         saveMenuItem.setText("Guardar");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,11 +143,22 @@ public class MainForm extends javax.swing.JFrame {
     private void showOpenDialog(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOpenDialog
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(this);
+        Notepad n = new Notepad(fileChooser.getSelectedFile());
+        showChild(n,true);
     }//GEN-LAST:event_showOpenDialog
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showSaveDialog(this);
+        try{
+            JInternalFrame selectedFrame = desktop.getSelectedFrame();
+            if(selectedFrame.getClass().getName().equals(Notepad.class.getName())){
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showSaveDialog(this);
+                ((Notepad)selectedFrame).save(fileChooser.getSelectedFile());
+            }
+        }
+        catch(Exception ex){
+            
+        }
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
     private void OptionPaneSettingsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionPaneSettingsMenuItemActionPerformed
@@ -134,6 +166,20 @@ public class MainForm extends javax.swing.JFrame {
         op.setVisible(true);
     }//GEN-LAST:event_OptionPaneSettingsMenuItemActionPerformed
 
+    private void newFileMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFileMenuItemActionPerformed
+        
+        Notepad n = new Notepad();
+        showChild(n,false);
+
+    }//GEN-LAST:event_newFileMenuItemActionPerformed
+
+    private void showChild(javax.swing.JInternalFrame frame, boolean maximizeForm){
+        desktop.add(frame);
+        frame.setLocation(0,0);
+        frame.setVisible(true);
+        if (maximizeForm)
+            desktop.getDesktopManager().maximizeFrame(frame);  
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -146,6 +192,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JMenuItem newFileMenuItem;
     private javax.swing.JMenuItem openMenu;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem saveMenuItem;
