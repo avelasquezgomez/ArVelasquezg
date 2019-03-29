@@ -15,7 +15,6 @@
                   <Image iconType="3" name="/resources/images/new.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
-                <Property name="actionCommand" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newFileMenuItemActionPerformed"/>
@@ -89,6 +88,34 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OptionPaneSettingsMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="bookMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Libros"/>
+                <Property name="actionCommand" type="java.lang.String" value="books"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bookMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="listMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lista de libros"/>
+                <Property name="actionCommand" type="java.lang.String" value="list"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="externalMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Libreria externa"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="actionCommand" type="java.lang.String" value="externalLib"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="externalMenuItemActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

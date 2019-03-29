@@ -50,6 +50,9 @@ JDesktopPane desktop;
         helpMenu = new javax.swing.JMenu();
         demosMenu = new javax.swing.JMenu();
         OptionPaneSettingsMenuItem = new javax.swing.JMenuItem();
+        bookMenuItem = new javax.swing.JMenuItem();
+        listMenuItem = new javax.swing.JMenuItem();
+        externalMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +60,6 @@ JDesktopPane desktop;
 
         newFileMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new.gif"))); // NOI18N
         newFileMenuItem.setText("Nuevo");
-        newFileMenuItem.setActionCommand("Nuevo");
         newFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newFileMenuItemActionPerformed(evt);
@@ -118,6 +120,34 @@ JDesktopPane desktop;
         });
         demosMenu.add(OptionPaneSettingsMenuItem);
 
+        bookMenuItem.setText("Libros");
+        bookMenuItem.setActionCommand("books");
+        bookMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookMenuItemActionPerformed(evt);
+            }
+        });
+        demosMenu.add(bookMenuItem);
+
+        listMenuItem.setText("Lista de libros");
+        listMenuItem.setActionCommand("list");
+        listMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listMenuItemActionPerformed(evt);
+            }
+        });
+        demosMenu.add(listMenuItem);
+
+        externalMenuItem.setText("Libreria externa");
+        externalMenuItem.setToolTipText("");
+        externalMenuItem.setActionCommand("externalLib");
+        externalMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                externalMenuItemActionPerformed(evt);
+            }
+        });
+        demosMenu.add(externalMenuItem);
+
         mainMenuBar.add(demosMenu);
 
         setJMenuBar(mainMenuBar);
@@ -173,6 +203,21 @@ JDesktopPane desktop;
 
     }//GEN-LAST:event_newFileMenuItemActionPerformed
 
+    private void bookMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookMenuItemActionPerformed
+        BookForm b = new BookForm();
+        showChild(b,false);
+    }//GEN-LAST:event_bookMenuItemActionPerformed
+
+    private void listMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMenuItemActionPerformed
+        BookList bl = new BookList();
+        showChild(bl, true);
+    }//GEN-LAST:event_listMenuItemActionPerformed
+
+    private void externalMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_externalMenuItemActionPerformed
+        TestForm t = new TestForm();
+        showChild(t,false);
+    }//GEN-LAST:event_externalMenuItemActionPerformed
+
     private void showChild(javax.swing.JInternalFrame frame, boolean maximizeForm){
         desktop.add(frame);
         frame.setLocation(0,0);
@@ -186,11 +231,14 @@ JDesktopPane desktop;
     private javax.swing.JCheckBoxMenuItem Option1CheckBoxMenuItem;
     private javax.swing.JCheckBoxMenuItem Option2CheckBoxMenuItem;
     private javax.swing.JMenuItem OptionPaneSettingsMenuItem;
+    private javax.swing.JMenuItem bookMenuItem;
     private javax.swing.JMenuItem closeMenu;
     private javax.swing.JMenu demosMenu;
+    private javax.swing.JMenuItem externalMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem listMenuItem;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JMenuItem newFileMenuItem;
     private javax.swing.JMenuItem openMenu;
