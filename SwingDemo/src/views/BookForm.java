@@ -19,6 +19,13 @@ public class BookForm extends javax.swing.JInternalFrame {
      * Creates new form BookForm
      */
     BookController bc;
+     public BookForm(String filePath) {
+        initComponents();
+        setDataComboBoxModel();
+        setController();
+        bc.setBook(filePath);
+        setBookData(bc.getBook());
+    }
     public BookForm() {
         initComponents();
         setDataComboBoxModel();

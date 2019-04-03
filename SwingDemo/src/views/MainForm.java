@@ -5,11 +5,12 @@
  */
 package views;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,9 @@ JDesktopPane desktop;
         setIconImage(new ImageIcon(getClass().getResource("/resources/images/tile.png")).getImage());
         desktop = new JDesktopPane();
         setContentPane(desktop);
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
+        timeLabel.setText(time.format(new Date()));
+        desktop.add(this.jToolBar1);
     }
 
     /**
@@ -37,6 +41,8 @@ JDesktopPane desktop;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
+        timeLabel = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newFileMenuItem = new javax.swing.JMenuItem();
@@ -53,8 +59,16 @@ JDesktopPane desktop;
         bookMenuItem = new javax.swing.JMenuItem();
         listMenuItem = new javax.swing.JMenuItem();
         externalMenuItem = new javax.swing.JMenuItem();
+        verifyId = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar1.setRollover(true);
+
+        timeLabel.setText("00:00");
+        jToolBar1.add(timeLabel);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.NORTH);
 
         fileMenu.setLabel("Archivo");
 
@@ -148,20 +162,17 @@ JDesktopPane desktop;
         });
         demosMenu.add(externalMenuItem);
 
+        verifyId.setText("Validar cédula");
+        verifyId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verifyIdActionPerformed(evt);
+            }
+        });
+        demosMenu.add(verifyId);
+
         mainMenuBar.add(demosMenu);
 
         setJMenuBar(mainMenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,6 +229,11 @@ JDesktopPane desktop;
         showChild(t,false);
     }//GEN-LAST:event_externalMenuItemActionPerformed
 
+    private void verifyIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyIdActionPerformed
+         ValidateIdForm v = new ValidateIdForm();
+        showChild(v,false);
+    }//GEN-LAST:event_verifyIdActionPerformed
+
     private void showChild(javax.swing.JInternalFrame frame, boolean maximizeForm){
         desktop.add(frame);
         frame.setLocation(0,0);
@@ -238,11 +254,14 @@ JDesktopPane desktop;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem listMenuItem;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JMenuItem newFileMenuItem;
     private javax.swing.JMenuItem openMenu;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JLabel timeLabel;
+    private javax.swing.JMenuItem verifyId;
     // End of variables declaration//GEN-END:variables
 }

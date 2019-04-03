@@ -5,19 +5,41 @@
  */
 package views;
 
+import controllers.BookController;
+import javax.swing.table.TableModel;
+import models.FileTableModel;
+
 /**
  *
  * @author William Sanchez
  */
 public class BookList extends javax.swing.JInternalFrame {
-
+    BookController bc;
     /**
      * Creates new form BookList
      */
     public BookList() {
         initComponents();
+        setController();
+        booksTable.setModel(new FileTableModel().getModel());
+    }
+    public void setController(){
+        bc = new BookController(this);
+        openDirectoryButton.addActionListener(bc);
+        this.newBookButton.addActionListener(bc);
+        this.showBookButton.addActionListener(bc);
     }
 
+    public void SetDirectory(String filePath){
+        this.directoryTextField.setText(filePath);
+    }
+    public void setBookTableModel(TableModel model){
+        booksTable.setModel(model);
+    }
+    
+    public String getSelectedBookFile(){
+        return (String) booksTable.getValueAt(booksTable.getSelectedRow(), 1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,54 +50,47 @@ public class BookList extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        openDirectoryButton = new javax.swing.JButton();
+        newBookButton = new javax.swing.JButton();
+        showBookButton = new javax.swing.JButton();
+        directoryTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        booksTable = new javax.swing.JTable();
 
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/open.png"))); // NOI18N
-        jButton1.setText("Directorio");
-        jButton1.setToolTipText("Seleccionar directorio");
-        jButton1.setActionCommand("directory");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        openDirectoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/open.png"))); // NOI18N
+        openDirectoryButton.setText("Directorio");
+        openDirectoryButton.setToolTipText("Seleccionar directorio");
+        openDirectoryButton.setActionCommand("directory");
+        openDirectoryButton.setFocusable(false);
+        openDirectoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        openDirectoryButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(openDirectoryButton);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new.png"))); // NOI18N
-        jButton2.setText("Nuevo");
-        jButton2.setToolTipText("Nuevo libro");
-        jButton2.setActionCommand("new");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        newBookButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/new.png"))); // NOI18N
+        newBookButton.setText("Nuevo");
+        newBookButton.setToolTipText("Nuevo libro");
+        newBookButton.setActionCommand("new");
+        newBookButton.setFocusable(false);
+        newBookButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newBookButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(newBookButton);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/notepad.png"))); // NOI18N
-        jButton3.setText("Ver");
-        jButton3.setActionCommand("show");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        showBookButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/notepad.png"))); // NOI18N
+        showBookButton.setText("Ver");
+        showBookButton.setActionCommand("show");
+        showBookButton.setFocusable(false);
+        showBookButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        showBookButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(showBookButton);
+
+        directoryTextField.setPreferredSize(new java.awt.Dimension(200, 24));
+        jToolBar1.add(directoryTextField);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.NORTH);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(booksTable);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -84,11 +99,12 @@ public class BookList extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTable booksTable;
+    private javax.swing.JTextField directoryTextField;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton newBookButton;
+    private javax.swing.JButton openDirectoryButton;
+    private javax.swing.JButton showBookButton;
     // End of variables declaration//GEN-END:variables
 }

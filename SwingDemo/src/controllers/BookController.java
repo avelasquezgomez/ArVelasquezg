@@ -16,9 +16,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
+import static javax.swing.JFileChooser.DIRECTORIES_ONLY;
 import models.Book;
+import models.FileTableModel;
 import views.BookForm;
+import views.BookList;
 
 /**
  *
@@ -26,6 +30,7 @@ import views.BookForm;
  */
 public class BookController implements ActionListener{
     BookForm bookForm;
+    BookList bookList;
     JFileChooser d;
     Book book;
     public BookController(BookForm f){
@@ -34,7 +39,12 @@ public class BookController implements ActionListener{
         d = new JFileChooser();
         book = new Book();
     }
-    
+     public BookController(BookList bl){
+        super();
+        bookList = bl;
+        d = new JFileChooser();
+        book = new Book();
+    }   
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
@@ -51,6 +61,19 @@ public class BookController implements ActionListener{
             case "clear":
                 bookForm.clear();
                 break;
+            case "directory":
+                d.setFileSelectionMode(DIRECTORIES_ONLY);
+                d.showOpenDialog(bookList);
+                File f = d.getSelectedFile();
+                bookList.SetDirectory(f.getPath());
+                bookList.setBookTableModel(new FileTableModel(f).getModel());
+                break;
+            case "new":
+                showBookForm("");
+                break;
+            case "show":
+                showBookForm(bookList.getSelectedBookFile());
+                break;                
         }
     }
     public void writeBook(File file){
@@ -76,5 +99,18 @@ public class BookController implements ActionListener{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BookController.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+    public void showBookForm(String selectedBook){
+        bookForm = selectedBook.isEmpty()?new BookForm():new BookForm(selectedBook);
+        JDesktopPane desktop = (JDesktopPane)bookList.getParent();
+        desktop.add(bookForm);
+        bookForm.setVisible(true);
+    }
+    public void setBook(String filePath){
+        File f = new File(filePath);
+        readBook(f);
+    }
+    public Book getBook(){
+        return book;
     }
 }
