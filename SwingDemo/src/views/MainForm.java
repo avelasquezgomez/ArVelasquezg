@@ -29,7 +29,7 @@ JDesktopPane desktop;
         setContentPane(desktop);
         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
         timeLabel.setText(time.format(new Date()));
-        desktop.add(this.jToolBar1);
+        getContentPane().add(mainToolBar, java.awt.BorderLayout.NORTH);
     }
 
     /**
@@ -41,7 +41,7 @@ JDesktopPane desktop;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
+        mainToolBar = new javax.swing.JToolBar();
         timeLabel = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -60,15 +60,18 @@ JDesktopPane desktop;
         listMenuItem = new javax.swing.JMenuItem();
         externalMenuItem = new javax.swing.JMenuItem();
         verifyId = new javax.swing.JMenuItem();
+        fileExplorerMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToolBar1.setRollover(true);
+        mainToolBar.setRollover(true);
+        mainToolBar.setName(""); // NOI18N
+        mainToolBar.setPreferredSize(new java.awt.Dimension(500, 20));
 
         timeLabel.setText("00:00");
-        jToolBar1.add(timeLabel);
+        mainToolBar.add(timeLabel);
 
-        getContentPane().add(jToolBar1, java.awt.BorderLayout.NORTH);
+        getContentPane().add(mainToolBar, java.awt.BorderLayout.NORTH);
 
         fileMenu.setLabel("Archivo");
 
@@ -170,6 +173,15 @@ JDesktopPane desktop;
         });
         demosMenu.add(verifyId);
 
+        fileExplorerMenuItem.setText("Explorardor de archivos");
+        fileExplorerMenuItem.setActionCommand("fileExplorer");
+        fileExplorerMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileExplorerMenuItemActionPerformed(evt);
+            }
+        });
+        demosMenu.add(fileExplorerMenuItem);
+
         mainMenuBar.add(demosMenu);
 
         setJMenuBar(mainMenuBar);
@@ -234,6 +246,11 @@ JDesktopPane desktop;
         showChild(v,false);
     }//GEN-LAST:event_verifyIdActionPerformed
 
+    private void fileExplorerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileExplorerMenuItemActionPerformed
+       FileExplorer fe = new FileExplorer();
+       showChild(fe, true);
+    }//GEN-LAST:event_fileExplorerMenuItemActionPerformed
+
     private void showChild(javax.swing.JInternalFrame frame, boolean maximizeForm){
         desktop.add(frame);
         frame.setLocation(0,0);
@@ -251,12 +268,13 @@ JDesktopPane desktop;
     private javax.swing.JMenuItem closeMenu;
     private javax.swing.JMenu demosMenu;
     private javax.swing.JMenuItem externalMenuItem;
+    private javax.swing.JMenuItem fileExplorerMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem listMenuItem;
     private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JToolBar mainToolBar;
     private javax.swing.JMenuItem newFileMenuItem;
     private javax.swing.JMenuItem openMenu;
     private javax.swing.JMenu optionsMenu;

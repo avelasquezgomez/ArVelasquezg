@@ -105,9 +105,9 @@ public class ValidateIdForm extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(birthDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(verifyButton)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -127,7 +127,7 @@ public class ValidateIdForm extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_verifyButtonActionPerformed
 
-    public String getBirthDateFromId(String idNumber){
+    public static String getBirthDateFromId(String idNumber){
         String day = idNumber.substring(3,5);
         String month = idNumber.substring(5,7);
         String year = idNumber.substring(7,9);
